@@ -1,0 +1,47 @@
+{
+  "name": "Telegram Group Manager Bot",
+  "description": "Advanced Telegram group manager bot with auto-deleting welcome messages, admin tools (kick, ban, mute, warn, purge, pin) and Heroku webhook support.",
+  "logo": "https://telegram.org/img/t_logo.png",
+  "keywords": ["telegram", "bot", "group-manager", "python"],
+  "repository": "https://github.com/your-username/telegram-bot",
+  "website": "https://telegram.org",
+
+  "stack": "heroku-24",
+
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Your Telegram Bot Token from @BotFather (e.g. 1234567890:ABCdef...)",
+      "required": true,
+      "value": ""
+    },
+    "WEBHOOK_URL": {
+      "description": "Your Heroku app URL — set this after deploy (e.g. https://your-app-name.herokuapp.com). Leave blank to auto-detect.",
+      "required": false,
+      "value": ""
+    },
+    "WELCOME_DELETE_AFTER": {
+      "description": "Seconds before the welcome message auto-deletes. Default is 600 (10 minutes).",
+      "required": false,
+      "value": "600"
+    }
+  },
+
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+
+  "addons": [],
+
+  "scripts": {
+    "postdeploy": "echo 'Bot deployed! Make sure WEBHOOK_URL is set to your Heroku app URL.'"
+  }
+}
