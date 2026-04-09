@@ -33,6 +33,11 @@ WELCOME_DELETE_AFTER = int(os.environ.get("WELCOME_DELETE_AFTER", 600))  # 10 mi
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL", "")          # e.g. https://your-app.herokuapp.com
 PORT = int(os.environ.get("PORT", 8443))
 
+# ── Video forward config ──────────────────────────────────────────────────────
+# https://t.me/sourioo/2  →  channel username = sourioo, message_id = 2
+VIDEO_CHANNEL = "sourioo"   # channel username (without @)
+VIDEO_MSG_ID  = 2           # message ID of the video post
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 ADMIN_STATUSES = {ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER}
 
@@ -327,6 +332,18 @@ async def purge_messages(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 
 # ── Info commands ─────────────────────────────────────────────────────────────
+async def forward_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Forward the pinned video from @sourioo channel to the current chat."""
+    try:
+        await context.bot.forward_message(
+            chat_id=update.effective_chat.id,
+            from_chat_id=f"@{VIDEO_CHANNEL}",
+            message_id=VIDEO_MSG_ID,
+        )
+    except TelegramError as e:
+        logger.warning("Could not forward video: %s", e)
+
+
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(
         "👋 <b>Group Manager Bot is online!</b>\n\n"
@@ -334,6 +351,16 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "Use /help to see all commands.",
         parse_mode="HTML",
     )
+    # Forward video from channel — no download, direct forward
+    try:
+        await context.bot.forward_message(
+            chat_id=update.effective_chat.id,
+            from_chat_id=f"@{VIDEO_CHANNEL}",
+            message_id=VIDEO_MSG_ID,
+        )
+    except TelegramError as e:
+        logger.warning("Could not forward video on /start: %s", e)
+    await forward_video(update, context)
 
 
 async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -370,6 +397,16 @@ async def cmd_rules(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "<i>Violations may result in a warning, mute, kick, or ban.</i>",
         parse_mode="HTML",
     )
+    # Forward video from channel — no download, direct forward
+    try:
+        await context.bot.forward_message(
+            chat_id=update.effective_chat.id,
+            from_chat_id=f"@{VIDEO_CHANNEL}",
+            message_id=VIDEO_MSG_ID,
+        )
+    except TelegramError as e:
+        logger.warning("Could not forward video on /rules: %s", e)
+    await forward_video(update, context)
 
 
 async def cmd_info(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
