@@ -1,47 +1,36 @@
 {
   "name": "Telegram Group Manager Bot",
-  "description": "Advanced Telegram group manager bot with auto-deleting welcome messages, admin tools (kick, ban, mute, warn, purge, pin) and Heroku webhook support.",
-  "logo": "https://telegram.org/img/t_logo.png",
+  "description": "Advanced Telegram group manager with auto-deleting welcome messages, kick, ban, mute, warn, purge and pin support.",
   "keywords": ["telegram", "bot", "group-manager", "python"],
-  "repository": "https://github.com/your-username/telegram-bot",
-  "website": "https://telegram.org",
-
-  "stack": "heroku-24",
-
+  "repository": "https://github.com/your-username/telegram-group-manager",
+  "homepage": "https://t.me/your_bot_username",
+  "author": "Your Name",
   "env": {
     "BOT_TOKEN": {
       "description": "Your Telegram Bot Token from @BotFather (e.g. 1234567890:ABCdef...)",
-      "required": true,
-      "value": ""
-    },
-    "WEBHOOK_URL": {
-      "description": "Your Heroku app URL — set this after deploy (e.g. https://your-app-name.herokuapp.com). Leave blank to auto-detect.",
-      "required": false,
-      "value": ""
+      "value": "",
+      "required": true
     },
     "WELCOME_DELETE_AFTER": {
-      "description": "Seconds before the welcome message auto-deletes. Default is 600 (10 minutes).",
-      "required": false,
-      "value": "600"
+      "description": "Seconds before welcome message auto-deletes. Default 600 = 10 minutes.",
+      "value": "600",
+      "required": false
     }
   },
-
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "eco"
-    }
-  },
-
   "buildpacks": [
     {
       "url": "heroku/python"
     }
   ],
-
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
   "addons": [],
-
   "scripts": {
-    "postdeploy": "echo 'Bot deployed! Make sure WEBHOOK_URL is set to your Heroku app URL.'"
-  }
+    "postdeploy": "echo 'Bot deployed successfully! Check logs with: heroku logs --tail'"
+  },
+  "success_url": "https://t.me/x"
 }
