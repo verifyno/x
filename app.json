@@ -1,20 +1,25 @@
 {
-  "name": "Telegram Group Manager Bot",
-  "description": "Advanced Telegram group manager with auto-deleting welcome messages, kick, ban, mute, warn, purge and pin support.",
-  "keywords": ["telegram", "bot", "group-manager", "python"],
-  "repository": "https://github.com/your-username/telegram-group-manager",
-  "homepage": "https://t.me/your_bot_username",
+  "name": "Telegram Userbot",
+  "description": "A simple Telethon-based Telegram userbot that updates your profile name with a custom emoji on startup.",
+  "keywords": ["telegram", "userbot", "telethon", "python"],
+  "repository": "https://github.com/your-username/telegram-userbot",
+  "homepage": "https://t.me/your_username",
   "author": "Your Name",
   "env": {
-    "BOT_TOKEN": {
-      "description": "Your Telegram Bot Token from @BotFather (e.g. 1234567890:ABCdef...)",
+    "API_ID": {
+      "description": "Your Telegram App API ID from my.telegram.org",
       "value": "",
       "required": true
     },
-    "WELCOME_DELETE_AFTER": {
-      "description": "Seconds before welcome message auto-deletes. Default 600 = 10 minutes.",
-      "value": "600",
-      "required": false
+    "API_HASH": {
+      "description": "Your Telegram App API Hash from my.telegram.org",
+      "value": "",
+      "required": true
+    },
+    "STRING_SESSION": {
+      "description": "Telethon StringSession — generate it locally by running generate_session.py",
+      "value": "",
+      "required": true
     }
   },
   "buildpacks": [
@@ -30,7 +35,7 @@
   },
   "addons": [],
   "scripts": {
-    "postdeploy": "echo 'Bot deployed successfully! Check logs with: heroku logs --tail'"
+    "postdeploy": "echo 'Userbot deployed successfully! Check logs with: heroku logs --tail'"
   },
   "success_url": "https://t.me/x"
 }
