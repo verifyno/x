@@ -1,41 +1,44 @@
 {
-  "name": "Telegram Userbot",
-  "description": "A simple Telethon-based Telegram userbot that updates your profile name with a custom emoji on startup.",
-  "keywords": ["telegram", "userbot", "telethon", "python"],
-  "repository": "https://github.com/your-username/telegram-userbot",
-  "homepage": "https://t.me/your_username",
-  "author": "Your Name",
+  "name": "Autumn Manager Bot",
+  "description": "🍂 Ultra-Advanced Telegram Group Management Bot with Tic-Tac-Toe, Fancy Text, X Downloader & more.",
+  "logo": "https://i.imgur.com/9vqKMiy.png",
+  "keywords": ["telegram", "bot", "group-manager", "python"],
+  "repository": "",
+  "website": "",
+
   "env": {
-    "API_ID": {
-      "description": "Your Telegram App API ID from my.telegram.org",
-      "value": "",
+    "BOT_TOKEN": {
+      "description": "🔑 Your Telegram Bot Token — get it from @BotFather",
       "required": true
     },
-    "API_HASH": {
-      "description": "Your Telegram App API Hash from my.telegram.org",
-      "value": "",
-      "required": true
+    "WELCOME_DELETE_AFTER": {
+      "description": "⏱ Seconds before welcome card is auto-deleted (default: 600)",
+      "value": "600",
+      "required": false
     },
-    "STRING_SESSION": {
-      "description": "Telethon StringSession — generate it locally by running generate_session.py",
-      "value": "",
-      "required": true
+    "WEBHOOK_URL": {
+      "description": "🌐 Your Heroku app URL e.g. https://your-app-name.herokuapp.com (leave blank to use polling instead)",
+      "required": false
+    },
+    "PORT": {
+      "description": "🔌 Port for webhook mode (Heroku sets this automatically)",
+      "value": "8443",
+      "required": false
     }
   },
-  "buildpacks": [
-    {
-      "url": "heroku/python"
-    }
-  ],
+
   "formation": {
     "worker": {
       "quantity": 1,
       "size": "eco"
     }
   },
-  "addons": [],
-  "scripts": {
-    "postdeploy": "echo 'Userbot deployed successfully! Check logs with: heroku logs --tail'"
-  },
-  "success_url": "https://t.me/x"
+
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+
+  "stack": "heroku-24"
 }
